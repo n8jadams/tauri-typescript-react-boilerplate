@@ -6,6 +6,7 @@
   "license": "MIT",
   "author": "Nate Adams",
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "prebuild": "rimraf ./dist",
     "build:fe": "webpack --production",
     "build:tauri": "tauri build",
@@ -13,6 +14,10 @@
     "dev": "concurrently -p \"[{name}]\" -n \"front-end,tauri\" -c \"bgGreen.bold,bgCyan.bold\" \"npm run dev:fe\" \"RUST_DEBUG=1 tauri dev\"",
     "dev:win": "concurrently -p \"[{name}]\" -n \"front-end,tauri\" -c \"bgGreen.bold,bgCyan.bold\" \"npm run dev:fe\" \"set RUST_DEBUG=1 && tauri dev\"",
     "dev:fe": "webpack --dev && webpack-dev-server --watch"
+  },
+  "resolutions": {
+    "minimist": "^1.2.2",
+    "websocket-extensions": "0.1.4"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
