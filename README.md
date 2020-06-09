@@ -28,7 +28,7 @@ $ npm run build
 Tauri will walk you through the rest.
 
 ## What doesn't work
-* Code splitting/chunking. Currently the webpack config manually injects all of the bundled javascript to the outputted HTML. I had to write this code myself since the [Tauri Webpack plugin](https://github.com/tauri-apps/tauri-webpack) didn't work. Since everything is local, it all loads fast, and I don't see the point in adding code splitting for this sort of setup.
+* Code splitting/chunking. Currently the webpack config manually injects all of the bundled javascript to the outputted HTML. Since everything is local, it all loads fast, and I don't see the point in adding code splitting for this sort of setup.
 * Linting and code formatting for Typescript. I might add this later.
 
 ## Contributing
