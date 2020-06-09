@@ -3,8 +3,6 @@ const PurgecssPlugin = require('purgecss-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const glob = require('glob')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const tauriWebpack = require('@tauri-apps/tauri-webpack')
-const webpackMerge = require('webpack-merge')
 const fs = require('fs')
 
 // A custom plugin to actually inline the outputted javascript into the index html
@@ -37,7 +35,6 @@ module.exports = (_, argv) => {
 		throw new Error('Cannot pass the --dev and --production flags!')
 	}
 
-	const tauriMode = !!process.env.TAURI
 	const isProd = !!argv.production
 
 	const createConfig = (projectName) => {
@@ -97,10 +94,6 @@ module.exports = (_, argv) => {
 				minimizer: [new TerserPlugin()],
 			}
 			config.plugins.push(new InjectInlineScriptToHtmlPlugin({ projectName }))
-		}
-
-		if (tauriMode) {
-			webpackMerge(webpackConfig, tauriWebpack.config())
 		}
 
 		return config

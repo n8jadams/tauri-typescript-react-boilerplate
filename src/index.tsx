@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
-import './style.css'
+import Tauri from 'tauri/api'
 
-const Tauri = (window as any).tauri
+import './style.css'
 
 function App(): React.ReactElement {
 	const [rustMsg, setRustMsg] = useState('')
