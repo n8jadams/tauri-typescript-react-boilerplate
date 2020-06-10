@@ -3,32 +3,6 @@ const PurgecssPlugin = require('purgecss-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const glob = require('glob')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const fs = require('fs')
-
-// A custom plugin to actually inline the outputted javascript into the index html
-// I might add some arguments and make this a bit more extensible
-function InjectInlineScriptToHtmlPlugin({
-	projectName
-}) {
-	return {
-		apply: compiler => {
-			compiler.hooks.done.tap('InjectInlineScript', () => {
-				const indexPath = path.resolve(__dirname, 'dist/index.html')
-				const outputJs = fs.readFileSync(path.resolve(__dirname, `dist/${projectName}.js`), 'utf-8')
-				const indexHtml = fs.readFileSync(indexPath, 'utf-8')
-				const splitHtml = indexHtml.split('</body>')
-				const outputHtml = splitHtml.map((part, i) => {
-					if(i !== splitHtml.length - 2) {
-						return part
-					}
-					return `${part}<script>${outputJs}</script>`
-				}).join('</body>')
-				fs.writeFileSync(indexPath, outputHtml, 'utf-8')
-				return false;
-			})
-		}
-	}
-}
 
 module.exports = (_, argv) => {
 	if (argv.production && argv.dev) {
@@ -75,15 +49,13 @@ module.exports = (_, argv) => {
 				}),
 				new HtmlWebpackPlugin({
 					filename: 'index.html',
-					hash: true,
 					template: path.resolve(__dirname, 'src/template.html'),
 					minify: isProd
 						? {
 								collapseWhitespace: true,
 								removeComments: true
 							}
-						: false,
-					inject: !isProd
+						: false
 				}),
 			]
 		}
@@ -93,7 +65,6 @@ module.exports = (_, argv) => {
 			config.optimization = {
 				minimizer: [new TerserPlugin()],
 			}
-			config.plugins.push(new InjectInlineScriptToHtmlPlugin({ projectName }))
 		}
 
 		return config

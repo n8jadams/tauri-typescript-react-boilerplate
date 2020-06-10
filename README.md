@@ -28,7 +28,7 @@ $ npm run build
 Tauri will walk you through the rest.
 
 ## What doesn't work
-* Code splitting/chunking. Currently the webpack config manually injects all of the bundled javascript to the outputted HTML. Since everything is local, it all loads fast, and I don't see the point in adding code splitting for this sort of setup.
+* Typescript autocomplete. This has to do with the `tauri` npm package. It's probably coming soon...
 * Linting and code formatting for Typescript. I might add this later.
 
 ## Contributing
