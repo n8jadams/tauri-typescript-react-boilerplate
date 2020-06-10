@@ -7,7 +7,7 @@ A Tauri Typescript React Boilerplate that works out of the box.
 - [ ] WSL (almost...)
 
 ## Setup
-Follow the [Tauri setup docs](https://tauri.studio/docs) in your platform to get everything set up for Tauri development, then run
+Follow the [Tauri setup docs](https://tauri.studio/docs/getting-started/intro/) in your platform to get everything set up for Tauri development, then run
 
 ```bash
 $ npm install
