@@ -1,25 +1,30 @@
-const path = require('path')
-const PurgecssPlugin = require('purgecss-webpack-plugin')
-const TerserPlugin = require('terser-webpack-plugin')
-const glob = require('glob')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+import path from 'path'
+import webpack from 'webpack'
 
-module.exports = (_, argv) => {
+import PurgecssPlugin from 'purgecss-webpack-plugin'
+import TerserPlugin from 'terser-webpack-plugin'
+import glob from 'glob'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+
+
+export default function(_, argv): webpack.Configuration[] {
 	if (argv.production && argv.dev) {
 		throw new Error('Cannot pass the --dev and --production flags!')
 	}
 
 	const isProd = !!argv.production
+	const outputPath = path.resolve(__dirname, 'dist')
+	const outputHtmlFilename = 'index.html'
 
 	const createConfig = (projectName) => {
-		const config = {
+		const config: webpack.Configuration = {
 			devtool: isProd ? false : 'source-map',
 			mode: 'none',
 			entry: {
 				[projectName]: path.resolve(__dirname, 'src/index.tsx')
 			},
 			output: {
-				path: path.resolve(__dirname, 'dist'),
+				path: outputPath,
 				filename: '[name].js',
 			},
 			module: {
@@ -48,7 +53,7 @@ module.exports = (_, argv) => {
 					paths: glob.sync(`../dist/${projectName}/*`)
 				}),
 				new HtmlWebpackPlugin({
-					filename: 'index.html',
+					filename: outputHtmlFilename,
 					template: path.resolve(__dirname, 'src/template.html'),
 					minify: isProd
 						? {
