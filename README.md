@@ -28,7 +28,7 @@ $ npm run build
 Tauri will walk you through the rest.
 
 ## What doesn't work
-* Typescript autocomplete. This has to do with the `tauri` npm package. It's probably coming soon...
+* Typescript autocomplete with Tauri imports. This has to do with the `tauri` npm package. It's probably coming soon...
 * Linting and code formatting for Typescript. I might add this later.
 
 ## Contributing
