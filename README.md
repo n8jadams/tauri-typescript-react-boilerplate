@@ -16,7 +16,7 @@ $ npm install
 ## Development
 
 ```bash
-$ npm run dev # or npm run dev:win if you're in the Windows shell
+$ npm run dev
 ```
 
 There's an example app that shows a little bit of how you can communicate between the front end (Typescript/JS) and back end (Rust)

@@ -11,9 +11,9 @@
     "build:fe": "webpack --production",
     "build:tauri": "tauri build",
     "build": "npm run build:fe && npm run build:tauri",
-    "dev": "concurrently -p \"[{name}]\" -n \"front-end,tauri\" -c \"bgGreen.bold,bgCyan.bold\" \"npm run dev:fe\" \"RUST_DEBUG=1 tauri dev\"",
-    "dev:win": "concurrently -p \"[{name}]\" -n \"front-end,tauri\" -c \"bgGreen.bold,bgCyan.bold\" \"npm run dev:fe\" \"set RUST_DEBUG=1 && tauri dev\"",
-    "dev:fe": "webpack-dev-server --watch"
+    "dev": "concurrently -p \"[{name}]\" -n \"front-end,tauri\" -c \"bgGreen.bold,bgCyan.bold\" \"npm run dev:fe\" \"npm run dev:tauri\"",
+    "dev:fe": "webpack-dev-server --watch",
+    "dev:tauri": "cross-env RUST_DEBUG=1 tauri dev"
   },
   "resolutions": {
     "minimist": "^1.2.2",
@@ -31,6 +31,7 @@
     "babel-loader": "^8.1.0",
     "concurrently": "^5.2.0",
     "core-js": "^2.6.5",
+    "cross-env": "^7.0.2",
     "css-loader": "^3.5.3",
     "glob": "^7.1.6",
     "html-webpack-plugin": "^4.3.0",
