@@ -8,7 +8,8 @@
 				"useBuiltIns": "usage",
 				"corejs": "2.6.5",
 				"targets": {
-					"esmodules": false
+					"esmodules": false,
+					"ie": 11
 				}
 			}
 		]
