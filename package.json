@@ -18,6 +18,7 @@
   "resolutions": {
     "elliptic": "^6.5.3",
     "minimist": "^1.2.2",
+    "serialize-javascript": "^3.1.0",
     "websocket-extensions": "0.1.4"
   },
   "devDependencies": {
