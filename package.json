@@ -1,6 +1,7 @@
 {
   "name": "tauri-typescript-react-boilerplate",
   "version": "1.0.0",
+  "private": true,
   "description": "A Tauri Typescript React Boilerplate that works out of the box.",
   "keywords": [],
   "license": "MIT",
@@ -16,6 +17,7 @@
     "dev:tauri": "cross-env RUST_DEBUG=1 tauri dev"
   },
   "resolutions": {
+    "bl": "^2.2.1",
     "elliptic": "^6.5.3",
     "minimist": "^1.2.2",
     "serialize-javascript": "^3.1.0",
