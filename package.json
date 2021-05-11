@@ -41,6 +41,7 @@
     "glob": "^7.1.6",
     "html-webpack-plugin": "^4.3.0",
     "inline-source-cli": "^2.0.0",
+    "lodash": "^4.17.21",
     "purgecss-webpack-plugin": "^2.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
