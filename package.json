@@ -38,6 +38,7 @@
     "core-js": "^2.6.5",
     "cross-env": "^7.0.2",
     "css-loader": "^3.5.3",
+    "dns-packet": "^5.2.2",
     "glob": "^7.1.6",
     "html-webpack-plugin": "^4.3.0",
     "inline-source-cli": "^2.0.0",
