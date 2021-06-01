@@ -34,7 +34,7 @@
     "@types/webpack": "^4.41.17",
     "@types/webpack-dev-server": "^3.11.0",
     "babel-loader": "^8.1.0",
-    "concurrently": "^5.2.0",
+    "concurrently": "^6.2.0",
     "core-js": "^2.6.5",
     "cross-env": "^7.0.2",
     "css-loader": "^3.5.3",
