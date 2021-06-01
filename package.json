@@ -45,7 +45,7 @@
     "lodash": "^4.17.21",
     "purgecss-webpack-plugin": "^2.2.0",
     "react": "^17.0.2",
-    "react-dom": "^16.13.1",
+    "react-dom": "^17.0.2",
     "rimraf": "^3.0.2",
     "style-loader": "^1.2.1",
     "tauri": "^0.11.1",
