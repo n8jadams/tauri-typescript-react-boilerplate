@@ -3,46 +3,22 @@
   windows_subsystem = "windows"
 )]
 
-mod cmd;
+#[derive(serde::Serialize)]
+struct CustomResponse {
+  message: String,
+}
 
-fn main() {// Register a listener to the "js-event" event
-  tauri::AppBuilder::new()
-    .invoke_handler(|_webview, arg| {
-      use cmd::Cmd::*;
-      match serde_json::from_str(arg) {
-        Err(e) => {
-          Err(e.to_string())
-        }
-        Ok(command) => {
-          match command {
-            // definitions for your custom commands from Cmd here
-            PerformRequest {
-              endpoint,
-              body,
-              callback,
-              error,
-            } => {
-              // tauri::execute_promise is a helper for APIs that uses the tauri.promisified JS function
-              // so you can easily communicate between JS and Rust with promises
-              tauri::execute_promise(
-                _webview,
-                move || {
-                  println!("{} {:?}", endpoint, body);
-                  // perform an async operation here
-                  // if the returned value is Ok, the promise will be resolved with its value
-                  // if the returned value is Err, the promise will be rejected with its value
-                  // the value is a string that will be eval'd
-                  Ok("{ message: 'Hello World from Rust!' }".to_string())
-                },
-                callback,
-                error,
-              )
-            }
-          }
-          Ok(())
-        }
-      }
-    })
-    .build()
-    .run();
+#[tauri::command]
+async fn message_from_rust(window: tauri::Window) -> Result<CustomResponse, String> {
+  println!("Called from {}", window.label());
+  Ok(CustomResponse {
+    message: "Hello from rust!".to_string()
+  })
+}
+
+fn main() {
+  tauri::Builder::default()
+    .invoke_handler(tauri::generate_handler![message_from_rust])
+    .run(tauri::generate_context!())
+    .expect("error while running tauri application");
 }
