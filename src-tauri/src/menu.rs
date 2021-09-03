@@ -1,73 +1,39 @@
-use tauri::{CustomMenuItem, Menu, MenuItem};
+// @todo: Address this section when this is worked out: https://github.com/tauri-apps/tauri/issues/2398
+use tauri::{CustomMenuItem, Menu, MenuItem, Submenu};
 
-pub fn get_menu() -> Vec<Menu<String>> {
-  let other_test_menu = MenuItem::Custom(CustomMenuItem::new("custom".into(), "Custom"));
-  let quit_menu = MenuItem::Custom(CustomMenuItem::new("quit".into(), "Quit"));
-
-  // macOS require to have at least Copy, Paste, Select all etc..
-  // to works fine. You should always add them.
-  #[cfg(any(target_os = "linux", target_os = "macos"))]
-  let menu = {
-    let custom_print_menu = MenuItem::Custom(CustomMenuItem::new("print".into(), "Print"));
-    vec![
-      Menu::new(
-        // on macOS first menu is always app name
-        "Tauri API",
-        vec![
-          // All's non-custom menu, do NOT return event's
-          // they are handled by the system automatically
-          MenuItem::About("Tauri".to_string()),
-          MenuItem::Services,
-          MenuItem::Separator,
-          MenuItem::Hide,
-          MenuItem::HideOthers,
-          MenuItem::ShowAll,
-          MenuItem::Separator,
-          quit_menu,
-        ],
-      ),
-      Menu::new(
-        "File",
-        vec![
-          custom_print_menu,
-          MenuItem::Separator,
-          other_test_menu,
-          MenuItem::CloseWindow,
-        ],
-      ),
-      Menu::new(
-        "Edit",
-        vec![
-          MenuItem::Undo,
-          MenuItem::Redo,
-          MenuItem::Separator,
-          MenuItem::Cut,
-          MenuItem::Copy,
-          MenuItem::Paste,
-          MenuItem::Separator,
-          MenuItem::SelectAll,
-        ],
-      ),
-      Menu::new("View", vec![MenuItem::EnterFullScreen]),
-      Menu::new("Window", vec![MenuItem::Minimize, MenuItem::Zoom]),
-      Menu::new(
-        "Help",
-        vec![MenuItem::Custom(CustomMenuItem::new(
-          "help".into(),
-          "Custom help",
-        ))],
-      ),
-    ]
-  };
-
-  // Attention, Windows only support custom menu for now.
-  // If we add any `MenuItem::*` they'll not render
-  // We need to use custom menu with `Menu::new()` and catch
-  // the events in the EventLoop.
-  #[cfg(target_os = "windows")]
-  let menu = vec![
-    Menu::new("File", vec![other_test_menu]),
-    Menu::new("Other menu", vec![quit_menu]),
-  ];
+pub fn get_menu() -> Menu {
+  fn custom_menu(name: &str) -> CustomMenuItem {
+    let c = CustomMenuItem::new(name.to_string(), name);
+    return c;
+  }
+  let menu = Menu::new()
+    .add_submenu(Submenu::new(
+      // on macOS first menu is always app name
+      "Tauri API",
+      Menu::new()
+        .add_native_item(MenuItem::About("Tauri".to_string()))
+        .add_native_item(MenuItem::Separator)
+        .add_native_item(MenuItem::Services)
+        .add_native_item(MenuItem::Separator)
+        .add_native_item(MenuItem::Hide)
+        .add_native_item(MenuItem::HideOthers)
+        .add_native_item(MenuItem::ShowAll)
+        .add_native_item(MenuItem::Separator)
+        .add_native_item(MenuItem::Quit),
+    ))
+    .add_submenu(Submenu::new(
+      "File",
+      Menu::new()
+        .add_item(custom_menu("Open...").accelerator("cmdOrControl+O"))
+        .add_native_item(MenuItem::Separator)
+        .add_item(custom_menu("Close").accelerator("cmdOrControl+W"))
+        .add_item(custom_menu("Save").accelerator("cmdOrControl+S"))
+        .add_item(custom_menu("Save As...").accelerator("shift+cmdOrControl+S")),
+    ))
+    .add_submenu(Submenu::new(
+      "Help",
+      Menu::new().add_item(custom_menu("Learn More")),
+    ))
+    .add_native_item(MenuItem::Copy);
   menu
 }

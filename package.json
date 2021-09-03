@@ -15,14 +15,6 @@
     "dev:fe": "webpack-dev-server --watch",
     "dev:tauri": "cross-env RUST_DEBUG=1 tauri dev"
   },
-  "resolutions": {
-    "bl": "^2.2.1",
-    "elliptic": "^6.5.3",
-    "minimist": "^1.2.2",
-    "node-forge": "^0.10.0",
-    "serialize-javascript": "^3.1.0",
-    "websocket-extensions": "0.1.4"
-  },
   "devDependencies": {
     "@babel/core": "^7.10.2",
     "@babel/preset-env": "^7.10.2",
@@ -32,8 +24,8 @@
     "@types/react": "^16.9.35",
     "@types/webpack": "^4.41.17",
     "@types/webpack-dev-server": "^3.11.0",
-    "@tauri-apps/api": "1.0.0-beta.1",
-    "@tauri-apps/cli": "^1.0.0-beta.0",
+    "@tauri-apps/api": "^1.0.0-beta.8",
+    "@tauri-apps/cli": "^1.0.0-beta.10",
     "babel-loader": "^8.1.0",
     "concurrently": "^5.2.0",
     "core-js": "^2.6.12",
