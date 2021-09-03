@@ -3,8 +3,7 @@ A Tauri Typescript React Boilerplate that works out of the box.
 
 - [x] MacOS
 - [x] Windows 10
-- [ ] Linux (Probably works but I haven't tested)
-- [ ] WSL?
+- [x] Linux
 
 ## Setup
 Follow the [Tauri setup docs](https://tauri.studio/docs/getting-started/intro/) in your platform to get everything set up for Tauri development, then run
