@@ -84,7 +84,7 @@ export default function(_, argv): webpack.Configuration[] {
 		outputConfigs[0].devServer = {
 			contentBase: path.join(__dirname, 'dist'),
 			compress: true,
-			port: 9000
+			port: 9090
 		}
 	}
 

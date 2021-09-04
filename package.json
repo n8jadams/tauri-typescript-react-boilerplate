@@ -13,7 +13,7 @@
     "build": "npm run build:fe && npm run build:tauri",
     "dev": "concurrently -p \"[{name}]\" -n \"front-end,tauri\" -c \"bgGreen.bold,bgCyan.bold\" \"npm run dev:fe\" \"npm run dev:tauri\"",
     "dev:fe": "webpack-dev-server --watch",
-    "dev:tauri": "cross-env RUST_DEBUG=1 tauri dev"
+    "dev:tauri": "cross-env RUST_DEBUG=1 NODE_TLS_REJECT_UNAUTHORIZED=0 tauri dev"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
